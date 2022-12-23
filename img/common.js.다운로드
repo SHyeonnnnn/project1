@@ -1,0 +1,289 @@
+
+function winPop(url, name, width, height, leftPosition, topPosition) {
+	window.open(url, name, 'toolbar=no, location=yes, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+width+', height='+height+', top='+topPosition+', left='+leftPosition);
+}
+
+function winClose(){
+	window.close();
+}
+function ellipsis( cutoff, wordbreak, escapeHtml ) {
+	var esc = function ( t ) {
+		return t
+			.replace( /&/g, '&amp;' )
+			.replace( /</g, '&lt;' )
+			.replace( />/g, '&gt;' )
+			.replace( /"/g, '&quot;' );
+	};
+
+	return function ( d, type, row ) {
+		// Order, search and type get the original data
+		if ( type !== 'display' ) {
+			return d;
+		}
+
+		if ( typeof d !== 'number' && typeof d !== 'string' ) {
+			return d;
+		}
+
+		d = d.toString(); // cast numbers
+
+		if ( d.length <= cutoff ) {
+			return d;
+		}
+
+		var shortened = d.substr(0, cutoff-1);
+
+		// Find the last white space character in the string
+		if ( wordbreak ) {
+			shortened = shortened.replace(/\s([^\s]*)$/, '');
+		}
+
+		// Protect against uncontrolled HTML input
+		if ( escapeHtml ) {
+			shortened = esc( shortened );
+		}
+
+		return '<span class="ellipsis" title="'+esc(d)+'">'+shortened+'&#8230;</span>';
+	};
+};
+
+var zoomLevel = 1;
+function zoomScreen(zoomVal) {
+	if( zoomVal == 0 ) {
+		zoomLevel = 1;
+	} else {
+		zoomLevel += zoomVal;	
+	}
+	
+	$( "body" ).css( { "zoom":zoomLevel, "-moz-transform":"scale(" + zoomLevel + ")" } );
+}
+function onlyNumber(obj) {
+    var regexp = /[^0-9]/gi;
+    var checkValue = $( obj ).val();
+    if( regexp.test( checkValue ) ) {
+         alert("숫자만 입력가능 합니다.");
+         $(obj).val( checkValue.replace( regexp, '' ));
+    }
+};
+function getColorTheme() {
+	var colorTheme = localStorage.getItem('color-theme');
+	if (colorTheme) {
+		return colorTheme;
+	} else {
+		return 'light';
+	}
+}
+
+function onlyNumberDash(obj) {
+	var regexp = /[^0-9\-]/gi;
+	var v = $( obj ).val();
+	if( regexp.test( v ) ) {
+		alert("숫자와 -만 입력가능 합니다.");
+		$( obj ).val( v.replace( regexp, '' ) );
+	}
+};
+
+function onlyEmail(_th)
+{
+	var regexp = /[^a-z0-9\-\_\.]/gi;
+ var v = $( _th ).val();
+ if( regexp.test( v ) ) {
+      alert("이메일 주소는 영문/숫자/기호만 입력 가능합니다.");
+      $( $(_th) ).val( v.replace( regexp, '' ) );
+ } 
+}
+
+function ChkString(str,compstr)
+{
+	var tmp = compstr ; 
+	var tmpLength = tmp.length ; 
+
+	for (i=0; i<tmpLength ; i++)
+	{
+		if (tmp.indexOf(str.substring(i,i+1)) < 0)
+		{
+			return str.substring(i,i+1);
+		}
+	} 
+
+}
+function XSSCheck(str, level) {
+	var tmpStr = str;
+	if (level == undefined || level == 0 ) {
+		return tmpStr.replace(/\<|\>|\"|\'|\%|\(|\)|\&|\+|\-/g, "");
+	} else {
+		if (level == 1) {
+			tmpStr = tmpStr.replace(/\</g, "&lt;");
+			tmpStr = tmpStr.replace(/\>/g, "&gt;");
+		} else {
+			tmpStr = "";
+		}
+	}
+	return tmpStr
+}
+
+//외국인등록번호 체크 return true, false
+//사용법 : fn_no_chk(sNo1 + sNo2)
+function fn_no_chk(reg_no){
+	
+	var sum =0; 
+	var odd = 0;
+	
+	var buf = new Array(13);
+	
+	for(var i =0; i< 13; i++){
+		buf[i] = parseInt(reg_no.charAt(i));
+	}
+
+	odd=buf[7]*10+buf[8];
+	if(odd%2 !=0) return false;
+	
+	if((buf[11] != 6) && (buf[11] != 7) && (buf[11]!= 8) && (buf[11]!= 9)) return false;
+	
+	var multi = [2,3,4,5,6,7,8,9,2,3,4,5];
+	
+	for (var i = 0, sum =0; i< 12; i++){
+		sum += (buf[i] *= multi[i]);
+	}
+	sum = 11 -(sum%11);
+	if(sum>=10) sum -= 10;
+	sum +=2;
+	if(sum>=10) sum -= 10;
+
+	if(sum != buf[12]) return false;
+	else return true;
+}
+
+
+//주소찾기 팝업
+function findAddressPopup() {
+	var pop = window.open("/common/findAddress.do","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+}
+
+function jusoCallBack(_zipCode, _addr, _addrDe)
+{
+	$('#nisZip_code').val(_zipCode);
+	$('#nisAddr').val(_addr);
+	$('#nisAddr_de').val(_addrDe);
+}
+
+//G-Pin 호출팝업
+function callGpin(_debugMode, gubun) {
+	
+ wWidth = 360;
+ wHight = 120;
+
+ wX = (window.screen.width - wWidth) / 2;
+ wY = (window.screen.height - wHight) / 2;
+ 
+ if(_debugMode) {
+		var w = window.open("/auth/gpin_sample.jsp", "gpinauth", "directories=no,toolbar=no,left=" + wX + ",top=" + wY + ",width=" + wWidth + ",height=" + wHight);
+	} else {
+		if (gubun == 'qna') {
+			var w = window.open("https://www.nis.go.kr:4016/G-PIN/qnaAuthRequest.jsp", "gpinauth", "directories=no,toolbar=no,left=" + wX + ",top=" + wY + ",width=" + wWidth + ",height=" + wHight);
+		} else {
+			var w = window.open("https://www.nis.go.kr:4016/G-PIN/reserveAuthRequest.jsp", "gpinauth", "directories=no,toolbar=no,left=" + wX + ",top=" + wY + ",width=" + wWidth + ",height=" + wHight);
+		}
+	}
+ 
+}
+
+//KMCert 호출
+//name : reqKMCISForm 인 form 은 반듯이 있어야 합니다.
+function openKMCISWindow() {
+ KMCIS_window = window.open('', 'KMCISWindow', 'width=425, height=550, resizable=0, scrollbars=no, status=0, titlebar=0, toolbar=0, left=435, top=250' );
+ if(KMCIS_window == null){
+	 if(navigator.userAgent.toLowerCase().lastIndexOf("ios")>-1 && navigator.userAgent.toLowerCase().lastIndexOf("safari")>-1){
+		 alert("사파리 앱의 팝업차단 옵션을 해제하신 후 다시 시도하여 주시기 바랍니다.\n\n※ 설정 > Safari > 팝업 차단 옵션 해제 ");
+	 }else{
+		alert(" ※ 윈도우 XP SP2 또는 인터넷 익스플로러 7 사용자일 경우에는 \n    화면 상단에 있는 팝업 차단 알림줄을 클릭하여 팝업을 허용해 주시기 바랍니다. \n\n※ MSN,야후,구글 팝업 차단 툴바가 설치된 경우 팝업허용을 해주시기 바랍니다.");
+	 }
+ }
+ document.reqKMCISForm.action = 'https://www.kmcert.com/kmcis/web/kmcisReq.jsp';
+ document.reqKMCISForm.target = 'KMCISWindow';
+ //console.log($('#tr_cert').val());
+	document.reqKMCISForm.submit();
+};
+
+var pageUrl = location.href;
+var pageTitle = document.title;
+
+//클릭 이벤트 감지
+var getObjId;
+var getObjClass;
+var isKakaoInit = false;
+
+function watchEventClick(event) {
+	getObjId = event.target.id;
+	getObjClass = event.target.className;
+	// 공유 버튼 클릭
+	if(getObjClass=="shareBtn") {
+		if($("meta[property='og:title']").length > 0)
+			pageTitle = $("meta[property='og:title']").attr("content");
+		
+		switch (getObjId) {
+			case "shareFB":
+				var shareUrlFB = "https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(pageUrl);
+				window.open(shareUrlFB, '', 'scrollbars=no, width=584, height=635');
+				break;
+
+			case "shareTWT":
+				var shareUrlTWT = "https://twitter.com/intent/tweet?text="+encodeURIComponent(pageTitle)+"&url="+encodeURIComponent(pageUrl);
+				window.open(shareUrlTWT, '', 'scrollbars=no, width=584, height=635');
+				break;
+
+			case "shareBand":
+				//var encodeBody = encodeURIComponent( pageTitle + "\n" + pageUrl); 
+				var encodeBody = encodeURIComponent( pageTitle + "\n" + pageUrl); 
+				var encodeRoute = "nis.go.kr"; 
+				var shareUrlBand = "https://band.us/plugin/share?body=" + encodeBody + '&route=' + encodeRoute;
+				window.open(shareUrlBand, '', 'scrollbars=no, width=584, height=635');
+				break;
+
+			case "shareNaver":
+				//var shareUrlNaver = "https://share.naver.com/web/shareView.nhn?url="+encodeURIComponent(pageUrl)+"&title="+encodeURIComponent(pageTitle);
+				var shareUrlNaver = "http://blog.naver.com/openapi/share?url="+encodeURIComponent(pageUrl);
+				window.open(shareUrlNaver, '', 'scrollbars=no, width=584, height=635');
+				break;
+
+			case "shareKS":
+				// // 사용할 앱의 JavaScript 키를 설정해 주세요.
+				if(!isKakaoInit) {
+					Kakao.init('806be27f412a465af836ac43174e2f1c');
+					isKakaoInit = true;
+				}
+				Kakao.Story.share({
+					url: pageUrl,
+					text: pageTitle
+				});
+			    break;
+
+			case "shareKT":
+				// // 사용할 앱의 JavaScript 키를 설정해 주세요.
+				var kakaoimg = $("meta[property='og:image']").attr("content");
+				if(!isKakaoInit) {
+					Kakao.init('806be27f412a465af836ac43174e2f1c');
+					isKakaoInit = true;
+				}
+				Kakao.Link.sendDefault({
+					objectType: 'feed',
+					content: {
+						title: pageTitle,
+						description: '',
+						imageUrl: kakaoimg,
+						link: {
+							mobileWebUrl: pageUrl,
+							webUrl: pageUrl
+						}
+					}
+				});
+				break;
+
+		} // switch, case 종료.
+	} // 공유 버튼 종료.
+}
+document.addEventListener("click", watchEventClick);
+
+$(document).ready(function(){
+	$('html').attr('color-theme', getColorTheme());
+});

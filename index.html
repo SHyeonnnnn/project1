@@ -1,0 +1,552 @@
+<!DOCTYPE HTML>
+<html lang='ko'>
+<head>
+	<title> </title>
+	<meta charset='utf-8'>
+	<meta name='Viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.6'>
+	<meta name='Title' content='국정원'>
+	<meta name='Subject' content='국정원 클론코딩'>
+	<meta name='Keywords' content='html5, css3, 웹표준, 관공서, 국정원'>
+	<meta name='Author' content='ksh'>
+	<meta name='Publisher' content='ksh'>
+	<meta name='Description' content='웹접근성, 웹표준을 준수한 국정원 클론 코딩입니다.'>
+	<meta name='Author-Date' content='2022/11/06'>
+	<meta name='Robots' content='index,follow'>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da21636698c7578105d0aa035bb6a78f"></script>
+	<script src="./js/script.js"></script>
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+        .overlay_info {border-radius: 6px; margin-bottom: 12px; float:left;position: relative; border: 1px solid #ccc; border-bottom: 2px solid #ddd;background-color:#fff;}
+        .overlay_info:nth-of-type(n) {border:0; box-shadow: 0px 1px 2px #888;}
+        .overlay_info a {display: block; background: #d95050; background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center; text-decoration: none; color: #fff; padding:12px 36px 12px 14px; font-size: 14px; border-radius: 6px 6px 0 0}
+        .overlay_info a strong {background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/place_icon.png) no-repeat; padding-left: 27px;}
+        .overlay_info .desc {padding:14px;position: relative; min-width: 190px; height: 56px}
+        .overlay_info img {vertical-align: top;}
+        .overlay_info .address {font-size: 12px; color: #333; position: absolute; left: 80px; right: 14px; top: 24px; white-space: normal}
+        .overlay_info:after {content:'';position: absolute; margin-left: -11px; left: 50%; bottom: -12px; width: 22px; height: 12px; background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png) no-repeat 0 bottom;}
+    </style>
+	<link rel='stylesheet' href='css/reset.css'>
+	<link rel='stylesheet' href='css/style1.css'>
+
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css' integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+	<script src='js/lib/jquery-1.12.4.min.js'></script>
+	<script src='js/lib/jquery.easing.1.3.js'></script>
+	<script src='js/lib/prefixfree.min.js'></script>
+	<script src='js/lib/modernizr-custom.js'></script>
+
+
+	<!--[if (lte IE 9)]>
+		<script src='js/lib/IE9.js'></script>
+	<![endif]-->
+
+	<!--[if (lte IE 8)]>
+		<script src='js/lib/html5shiv.min.js'></script>
+		<link rel='stylesheet' href='#'>
+	<![endif]-->
+
+	<!--[if (lte IE 7)]>
+		<link rel='stylesheet' href='#'>
+	<![endif]-->
+
+</head>
+<body>
+	<ul id="skip">
+		<li><a href="#header">헤더 바로가기</a></li>
+		<li><a href="#nav">메뉴 바로가기</a></li>
+		<li><a href="#content">내용 바로가기</a></li>
+	</ul>
+	<div id="wrap">
+		<header id="header">
+			<div class="container">				
+				<nav id="nav">
+					<ul>
+						<li><h1 class="logo"><a href="#"><img src="./img/logo_header_nis.png" alt=""></a></h1></li>
+						<li class="menu"><a href="#" class="txt_subtitle2">소식 &middot; 정보</a>
+							<div class="drop d1">
+								<ul>
+									<li>
+										<h2><a href="#">알림 &middot; 소식 </a></h2>
+										<p><a href="#">공지사항</a></p>
+										<p><a href="#">보도자료</a></p>
+										<p><a href="#">NIS NEWS</a></p>
+										<p><a href="#">입법예고</a></p>
+									</li>
+									<li>
+										<h2><a href="#">생활속정보</a></h2>
+										<p><a href="#">대테러용어</a></p>
+										<p><a href="#">여행금지국 방문자 교육</a></p>
+										<p><a href="#">정보보안 생활수칙</a></p>
+										<p><a href="#">국제범죄예방요령</a></p>
+									</li>
+									<li>
+										<h2><a href="#">동영상</a></h2>
+										<p><a href="#">院 홍보 &middot; 111신고</a></p>
+										<p><a href="#">해외안전</a></p>
+										<p><a href="#">대테러 &middot; 국제범죄</a></p>
+										<p><a href="#">산업보안</a></p>
+										<p><a href="#">사이버안보</a></p>
+										<p><a href="#">무빙툰으로 보는 대공사건</a></p>
+									</li>
+									<li>
+										<h2><a href="#">발간자료</a></h2>
+										<p><a href="#">북한법령집</a></p>
+										<p><a href="#">방첩</a></p>
+										<p><a href="#">대테러</a></p>
+										<p><a href="#">국제범죄</a></p>
+										<p><a href="#">사이버안보</a></p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<h2><a href="#">포스터 &middot; 만화</a></h2>
+										<p><a href="#">포스터</a></p>
+										<p><a href="#">만화</a></p>
+									</li>
+									<li>
+										<h2><a href="#">카드뉴스</a></h2>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="menu"><a href="#">참여 &middot; 민원</a>
+							<div class="drop d2">
+								<ul class="h100">
+									<li>
+										<h2><a href="#">111 신고</a></h2>
+									</li>
+									<li>
+										<h2><a href="#">채용안내</a></h2>
+									</li>
+									<li>
+										<h2><a href="#">추리퀴즈</a></h2>
+									</li>
+									<li>
+										<h2><a href="#">안보전시관 견학</a></h2>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<h2><a href="#">민원신청하기</a></h2>
+										<p><a href="#">민원 신청</a></p>
+										<p><a href="#">내 민원 확인하기</a></p>
+									</li>
+									<li>
+										<h2><a href="#">정보공개</a></h2>
+										<p><a href="#">정보공개청구</a></p>
+										<p><a href="#">청구처리조회</a></p>
+										<p><a href="#">정보목록</a></p>
+										<p><a href="#">비공개 대상 정보 기준</a></p>
+										<p><a href="#">불복구제 제도 및 절차</a></p>
+										<p><a href="#">법령 &middot; 서식</a></p>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="menu"><a href="#">주요업무</a>
+							<div class="drop d3">
+								<ul>
+									<li>
+										<h2><a href="#">방첩</a></h2>
+										<p><a href="#">소개</a></p>
+										<p><a href="#">방첩개념</a></p>
+										<p><a href="#">스파이 사건</a></p>
+									</li>
+									<li>
+										<h2><a href="#">대테러</a></h2>
+										<p><a href="#">소개</a></p>
+										<p><a href="#">국내테러경보</a></p>
+										<p><a href="#">국제테러경보</a></p>
+									</li>
+									<li>
+										<h2><a href="#">산업보안</a></h2>
+										<p><a href="#">소개</a></p>
+										<p><a href="#">기술유출현황</a></p>
+										<p><a href="#">국가핵심기술</a></p>
+									</li>
+									<li>
+										<h2><a href="#">방위산업보호</a></h2>
+										<p><a href="#">소개</a></p>
+										<p><a href="#">방위산업기술</a></p>
+										<p><a href="#">전략물자</a></p>
+									</li>
+								</ul>
+								<ul>
+									<li>
+										<h2><a href="#">해외정보</a></h2>
+									</li>
+									<li>
+										<h2><a href="#">국제범죄</a></h2>
+										<p><a href="#">소개</a></p>
+										<p><a href="#">마약</a></p>
+										<p><a href="#">위폐</a></p>
+										<p><a href="#">밀수 &middot; 밀입국</a></p>
+										<p><a href="#">금융범죄</a></p>
+										<p><a href="#">사이버범죄</a></p>
+									</li>
+									<li>
+										<h2><a href="#">사이버안보</a></h2>
+										<p><a href="#">소개</a></p>
+										<p><a href="#">사이버위기경보</a></p>
+										<p><a href="#">보안적합성 검증</a></p>
+										<p><a href="#">암호모듈 검증</a></p>
+									</li>
+									<li>
+										<h2><a href="#">대공수사</a></h2>
+										<p><a href="#">소개</a></p>
+										<p><a href="#">수사권이관</a></p>
+										<p><a href="#">주요 이적단체 판결사례</a></p>
+										<p><a href="#">주요수사결과</a></p>
+										<p><a href="#">북한의 대남 침투 &middot; 도발 사건</a></p>
+									</li>
+								</ul>
+								<ul class="h100">
+									<li>
+										<h2><a href="#">대북정보</a></h2>
+									</li>
+									<li>
+										<h2><a href="#">우주안보정보</a></h2>
+									</li>
+									<li>
+										<h2><a href="#">국가보안</a></h2>
+									</li>
+									<li>
+										<h2><a href="#">북한이탈주민보호</a></h2>
+									</li>
+								</ul>
+							</div>
+						</li>
+						<li class="menu"><a href="#">기관소개</a>
+							<div class="drop d4">
+								<ul class="h100">
+									<li>
+										<h2><a href="#">직무 &middot; 비전</a></h2>
+									</li>
+									<li>
+										<h2><a href="#">원훈</a></h2>
+									</li>
+									<li>
+										<h2><a href="#">직원헌장</a></h2>
+									</li>
+									<li>
+										<h2><a href="#">GI소개</a></h2>
+									</li>
+								</ul>									
+								<ul>
+									<li>
+										<h2><a href="#">국정원역사</a></h2>
+										<p><a href="#">주요연혁</a></p>
+										<p><a href="#">역대원장</a></p>
+										<p><a href="#">역대원훈</a></p>
+									</li>
+									<li>
+										<h2><a href="#">관련법령</a></h2>
+										<p><a href="#">국정원 소관법령</a></p>
+										<p><a href="#">타부처 소관법령</a></p>
+									</li>
+									<li>
+										<h2><a href="#">센터소개</a></h2>
+										<p><a href="#">국가사이버안보센터</a></p>
+										<p><a href="#">방첩정보공유센터</a></p>
+										<p><a href="#">산업기밀보호센터</a></p>
+										<p><a href="#">국제범죄정보센터</a></p>
+										<p><a href="#">테러정보통합센터</a></p>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<section id="section1">
+			<video src="./img/main_video6.mp4" autoplay muted></video>
+			<form action="#" method="post">
+				<div id="search">
+					<input type="text" name="search" placeholder="산업스파이" title="검색어입력">
+					<button type="submit"></button>
+				</div>
+			</form>
+		</section>
+		<section id="section2">
+			<div class="container cardwrap">
+				<div class="card sns">
+					<div class="card-header">
+						<p>카드뉴스</p>
+					</div>
+					<div class="card-image">
+						<a href="javascript:"><img src="./img/221110_01.png" alt=""></a>
+					</div>
+					<div class="card-body">
+						<a href="javascript:">
+							<p class="cb-1">드론, 재미로 띄웠다가 벌금 500만원?</p>
+						</a>
+						<a href="javascript:">
+							<p class="cb-2">#국가정보원 #항공안전법 #생활속 범죄예방</p>
+						</a>
+					</div>
+					<div class="card-footer">
+						<a href="javascript:">
+							카드뉴스 더 보기
+						</a>
+					</div>
+				</div>
+				<div class="card press">
+					<div class="card-header">
+						<p>Press</p>
+					</div>
+					<div class="card-image">
+						<a href="javascript:"><img src="./img/img_press_2.png" alt=""></a>
+					</div>
+					<div class="card-body">
+						<a href="javascript:">
+							<p class="cb-1">국정원 주최 '2022 사이버공격방어대회', The Duck팀('티오리') 종합우승</p>
+						</a>
+						<a href="javascript:">
+							<p class="cb-2">국가정보원이 대구광역시, 경상북도와 함께 주최하고 국가보안기술연구소가 주관한 '2022 사이버공격방어대회'(CCE : Cyber Conflict Exercise)가 10월 28일 막을 내렸다.
+								대회 종합우승은 정보보안업체 '티오리' 소속 강우원, 임준오 직원이 함께한 'The Duck'팀이 차지했다.</p>
+						</a>
+					</div>
+					<div class="card-footer">
+						<a href="javascript:">
+							보도자료 더 보기
+						</a>
+				</div>
+			</div>
+		</section>
+		<section id="section3">
+			<div class="container content-wrap">
+				<div class="content">
+					<div class="content-body">
+						<div class="content-heading">
+							<p>About</p>
+						</div>
+						<p class="content-title">국가와 국민을 향해 <br>국가정보원이 뛰고 있습니다.</p>
+					</div>
+					<div class="content-images" id="about_slider">
+						<div class="slider-wrapper">
+							<a class="image-card" href="javascript:">
+								<img src="./img/img_about_1.jpg" alt="직무ㆍ비전">
+								<div class="image-name">
+									<p class="">직무ㆍ비전</p>
+								</div>
+							</a>
+						</div>
+						<div class="slider-wrapper">
+							<a class="image-card" href="javascript:">
+								<img src="./img/img_about_2.png" alt="국정원 역사">
+								<div class="image-name">
+									<p class="">국정원 역사</p>
+								</div>
+							</a>
+						</div>
+						<div class="slider-wrapper">
+							<a class="image-card" href="javascript:">
+								<img src="./img/img_about_3.jpg" alt="관련 법령">
+								<div class="image-name">
+									<p class="">관련 법령</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="section4">
+			<div class="content-wrap">
+				<div class="content-c">
+					<div class="content-images">
+						<div class="image career-image-1">
+							<img src="./img/img_career_3.png" alt="국가가 정말로 원하는 사람! 바로 당신입니다.">
+						</div>
+						<div class="image career-image-2">
+							<img src="./img/img_career_2.png" alt="채용면접관이 이력서를 보고 인터뷰 하는 이미지">
+						</div>
+					</div>
+					<div class="content-header txt-heading-2-500 font-gray00">
+						<p>Identity</p>
+					</div>
+					
+					<div class="content-body">
+						<div class="content-title" style="font-size:35px; font-weight:450;">
+							<p>우리는 陰地에서 일하고 <br>陽地를 指向한다</p>
+						</div>
+						<div class="content-text">
+							<p class="">투철한 애국심과 사명감, 최고의 업무 전문성으로 <br>모든 안보위협에 선제적으로 대처하는 최고의 정보요원</p>
+							<div class="career-btns">
+								<a class="more-link" href="javascript:" target="_blank" title="채용사이트 - 인재상 새창열림">인재상</a>
+								<a class="more-link" href="javascript:" target="_blank" title="채용사이트 새창열림">채용사이트 바로가기</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="section5">
+			<div id="map" style="width:100%; height:400px;"></div>
+    		<div id="roadview" style="width:100%; height:524px"></div>
+		</section>
+		<section id="section6">
+			<div class="container1">
+				<ul class="list" id="slider">
+					<li class="slide">
+						<img src="./posterimg/1.jpg" alt="">
+					</li>
+					<li class="slide">
+						<img src="./posterimg/2.png" alt="">
+					</li>
+					<li class="slide">
+						<img src="./posterimg/3.jpg" alt="">
+					</li>
+					<li class="slide">
+						<img src="./posterimg/4.jpg" alt="">
+					</li>
+					<li class="slide">
+						<img src="./posterimg/5.jpg" alt="">
+					</li>
+					<li class="slide">
+						<img src="./posterimg/6.jpg" alt="">
+					</li>
+					<li class="slide">
+						<img src="./posterimg/7.jpg" alt="">
+					</li>
+				</ul>
+				<p class="pager">
+					<span>1</span>
+					<span>2</span>
+					<span>3</span>
+					<span>4</span>
+					<span>5</span>
+					<span>6</span>
+					<span>7</span>
+				</p>
+				<a href="javascript:" id="prev"></a>
+				<a href="javascript:" id="next"></a>
+				<a href="javascript:" id="play"><i class="fas fa-play"></i></a>
+				<a href="javascript:" id="pause"><i class="fas fa-pause"></i></a>
+			</div>
+		</section>
+		<footer id="footer">
+			<div class="footer">
+				<div class="footer-wrapper">
+					<div class="footer-content">
+						<nav class="menus">
+							<div class="logo">
+							  NIS 로고
+							</div>
+							<div class="menu">
+								<a href="javascript:" class="menu-link">저작권 정책</a>
+							</div>
+							<div class="divider"></div>
+							<div class="menu">
+								<a href="javascript:" class="menu-link">개인정보 처리방침</a>
+							</div>
+							<div class="divider"></div>
+							<div class="menu">
+								<a href="javascript:" class="menu-link">FAQ</a>
+							</div>
+							<div class="divider"></div>
+							<div class="menu">
+								<a href="javascript:" class="menu-link">Q&amp;A</a>
+							</div>
+							<div class="divider"></div>
+							<div class="menu">
+								<a href="javascript:" class="menu-link">사이트맵</a>
+							</div>
+						</nav>
+						<div class="desc">
+							<p>Copyright <span>©</span> National intelligence service, Republic of Korea</p>
+						</div>
+					</div>
+					<div class="footer-btns">
+						<nav class="icon-menus">
+							<a title="새창" href="javascript:" target="_blank">
+								<img alt="" class="icon wa" src="./img/WA_mark.png">
+							</a>
+							<a href="javascript:" target="_blank" title="">
+								<p></p>
+							</a>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapCenter = new kakao.maps.LatLng(37.268054,127.005436), // 지도의 중심좌표
+        mapOption = {
+            center: mapCenter, // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+        
+
+        // 커스텀 오버레이에 표시할 내용입니다
+        // HTML 문자열 또는 Dom Element 입니다
+        var content = '<div class="overlay_info">';
+        content += '    <a href="https://place.map.kakao.com/86560554" target="_blank"><strong>더휴먼아카데미</strong></a>';
+        content += '    <div class="desc">';
+        content += '        <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/place_thumb.png" alt="">';
+        content += '        <span class="address">경기 수원시 팔달구 갓매산로 38 다성프라자 3층</span>';
+        content += '    </div>';
+        content += '</div>';
+
+        // 커스텀 오버레이가 표시될 위치입니다 
+        var position = new kakao.maps.LatLng(37.268054,127.005436);
+
+        // 커스텀 오버레이를 생성합니다
+        var mapCustomOverlay = new kakao.maps.CustomOverlay({
+            position: position,
+            content: content,
+            xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
+            yAnchor: 1.1 // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
+        });
+
+        // 커스텀 오버레이를 지도에 표시합니다
+        mapCustomOverlay.setMap(map);
+
+        var rvContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+        var rv = new kakao.maps.Roadview(rvContainer); //로드뷰 객체
+        var rvClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+
+        //지도의 중심좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+        rvClient.getNearestPanoId(mapCenter, 50, function(panoId) {
+            rv.setPanoId(panoId, mapCenter); //panoId와 중심좌표를 통해 로드뷰 실행
+        });
+
+        kakao.maps.event.addListener(rv, 'init', function() {
+
+            // 커스텀 오버레이를 생성합니다
+            var rvCustomOverlay = new kakao.maps.CustomOverlay({
+                position: position,
+                content: content,
+                xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
+                yAnchor: 0.5 // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
+            });
+
+            //rvCustomOverlay.setAltitude(2); //커스텀 오버레이의 고도값을 설정합니다.(로드뷰 화면 중앙이 0입니다)
+            rvCustomOverlay.setMap(rv);
+
+            var projection = rv.getProjection(); // viewpoint(화면좌표)값을 추출할 수 있는 projection 객체를 가져옵니다.
+            
+            // 커스텀오버레이의 position과 altitude값을 통해 viewpoint값(화면좌표)를 추출합니다.
+            var viewpoint = projection.viewpointFromCoords(rvCustomOverlay.getPosition(), rvCustomOverlay.getAltitude());
+
+            rv.setViewpoint(viewpoint); //커스텀 오버레이를 로드뷰의 가운데에 오도록 로드뷰의 시점을 변화 시킵니다.
+        });
+        // 지도 중심좌표를 얻어옵니다 
+    var latlng = map.getCenter(); 
+    
+    var message = '변경된 지도 중심좌표는 ' + latlng.getLat() + ' 이고, ';
+    message += '경도는 ' + latlng.getLng() + ' 입니다';
+    
+    var resultDiv = document.getElementById('result');  
+    resultDiv.innerHTML = message;
+	</script>
+</body>
+</html>
